@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Prompt {
 	
-	private final static String prompt="cal>";
+//	private final static String prompt="cal>";
 	
 	public void runPrompt() {
 		
@@ -12,10 +12,16 @@ public class Prompt {
 		Scanner scanner = new Scanner(System.in);
 		Calender cal = new Calender();
 		
-		int month = 0;
+		int month = -1;
+		int year = -1;
+		
 		while(true) {
+			System.out.println("년도을 입력하세요.");
+			System.out.println("Year> ");
+			year = scanner.nextInt();
+			
 			System.out.println("달을 입력하세요.");
-			System.out.println(prompt);
+			System.out.println("Month> ");
 			month = scanner.nextInt();
 			if (month ==-1) {
 				break;
@@ -23,7 +29,7 @@ public class Prompt {
 			if (month > 12) {
 				continue;
 			}
-			cal.printCalender(2021, month);
+			cal.printCalender(year, month);
 			
 		}
 		System.out.println("프로그램 종료");
