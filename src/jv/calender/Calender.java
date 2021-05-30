@@ -2,8 +2,8 @@ package jv.calender;
 
 public class Calender {
 	
-	private static final int[] maxDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	private static final int[] leapMaxDays = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};	
+	private static final int[] maxDays = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	private static final int[] leapMaxDays = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};	
 	
 	public boolean isLeapYear(int year) {
 		if(year % 4 ==0 && (year % 100 !=0 || year % 400 ==0)) {
@@ -14,16 +14,42 @@ public class Calender {
 	
 	public int getmaxDaysOfMonth(int year, int month) {
 		if (isLeapYear(year)) {
-			return leapMaxDays[month - 1];
+			return leapMaxDays[month];
 		}else {
-			return maxDays[month - 1];			
+			return maxDays[month];			
 		}
 	}
 	
-	public void printCalender(int year, int month, int weekday) {
-		System.out.printf("     <<%4d년%3d월>>\n", year, month);
+	private int getWeekDay(int year, int month, int day) {
+		int syear = 1970;
+		final int STANDARD_WEEKDAY = 4; //1970/Jan/1st = Thursday
+		
+		int count = 0;
+		
+		for (int i = syear; i < year; i++) {
+			int delta = isLeapYear(i) ? 366 : 365;
+			count += delta;
+		}
+		
+		//System.out.println(count);
+		for (int i = 1; i < month; i++) {
+			int delta = getmaxDaysOfMonth(year, i);
+			count += delta;
+		}
+		
+		count += day-1;
+		
+		int weekday = (count + STANDARD_WEEKDAY) % 7;
+		return weekday;
+	}
+	
+	public void printCalender(int year, int month) {
+		System.out.printf("     <<%d년%d월>>\n", year, month);
 		System.out.println("  SU MO TU WE TH FR SA ");
 		System.out.println("  --------------------");
+		
+		//get weekday automatically
+		int weekday =getWeekDay(year, month, 1);
 		
 		//print black space
 		for (int i=0; i<weekday; i++) {
