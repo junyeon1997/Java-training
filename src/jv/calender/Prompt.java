@@ -116,7 +116,7 @@ public class Prompt {
         System.out.println("일정을 입력해 주세요.(끝에;)");
         String word;
         while (!(word = s.next()).endsWith(";")){
-        	text += word+"\n";
+        	text += word+" ";
         }
         word = word.replace(";", "");
         text+=word;
