@@ -3,6 +3,16 @@ package jv.calender;
 import java.util.Scanner;
 
 public class Prompt {
+	public void printMenu() {
+		System.out.println("+----------------------+");
+		System.out.println("| 1. 일정 등록");
+		System.out.println("| 2. 일정 검색");
+		System.out.println("| 3. 달력 보기");
+		System.out.println("| h. 도움말 q. 종료");
+		System.out.println("+----------------------+");
+
+	}
+	
 	/**
 	 * 
 	 * @param week 요일명
@@ -23,43 +33,51 @@ public class Prompt {
 	
 	public void runPrompt() {
 		
-		//숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
+		printMenu();
+		
 		Scanner scanner = new Scanner(System.in);
 		Calender cal = new Calender();
 		
-		int month = -1;
-		int year = -1;
+		
 	
 		while(true) {
-			System.out.println("년도을 입력하세요.(exit: -1)");
-			System.out.println("Year> ");
-			year = scanner.nextInt();
-			
-			if ( year == -1)
+			String cmd = scanner.next();
+			if(cmd.equals("1")) cmdRegister();
+			else if (cmd.equals("2")) cmdSearch();
+			else if (cmd.equals("3")) cmdCal(scanner, cal);
+			else if (cmd.equals("h")) printMenu();
+			else if (cmd.equals("q")) 
 				break;
-			
-			System.out.println("달을 입력하세요.(exit: -1)");
-			System.out.println("Month> ");
-			month = scanner.nextInt();
-			
-			if (month ==-1) {
-				break;
-			}
-			if (month > 12 || month < 1) {
-				System.out.println("잘못된 입력입니다.");
-				continue;
-			}
-			//요일입력 받지 않음
-//			System.out.println("첫째날의 요일을 입력하세요 (su, mo, tu, we, th, fr, sa)");
-//			String str_weekday = scanner.next();
-//			weekday = parseDay(str_weekday);
-			
-			cal.printCalender(year, month);
-			
 		}
+	
 		System.out.println("프로그램 종료");
 		scanner.close();
+	}
 		
+	private void cmdCal(Scanner s, Calender c) {
+		int month = -1;
+		int year = -1;
+		System.out.println("년도을 입력하세요.(exit: -1)");
+		System.out.println("Year> ");
+		year = s.nextInt();
+		
+		System.out.println("달을 입력하세요.(exit: -1)");
+		System.out.println("Month> ");
+		month = s.nextInt();
+	
+		if (month > 12 || month < 1) {
+			System.out.println("잘못된 입력입니다.");
+			return;
+		}
+
+		c.printCalender(year, month);
+	}
+
+	private void cmdSearch() {
+		
+	}
+
+	private void cmdRegister() {
 		
 	}
 
@@ -70,3 +88,4 @@ public static void main(String[] args) {
 	}
 
 }
+
