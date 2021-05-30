@@ -1,5 +1,6 @@
 package jv.calender;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Prompt {
@@ -20,34 +21,55 @@ public class Prompt {
 	 */
 	
 	public int parseDay(String week) {
-		if (week.equals("su")) return 0; 
-		else if (week.equals("mo")) return 1;
-		else if (week.equals("tu")) return 2;
-		else if (week.equals("we")) return 3;
-		else if (week.equals("th")) return 4;
-		else if (week.equals("fr")) return 5;
-		else if (week.equals("sa")) return 6;
-		else return 0;
-	}
+		switch (week) {
+		case "su":
+			return 0;
+		case "mo":
+			return 0;	
+		case "tu":
+			return 0;
+		case "we":
+			return 0;
+		case "th":
+			return 0;
+		case "fr":
+			return 0;
+		case "sa":
+			return 0;
+			default:
+				return 0;
+		}
+}
 	
 	
-	public void runPrompt() {
+	public void runPrompt() throws ParseException {
 		
 		printMenu();
-		
 		Scanner scanner = new Scanner(System.in);
 		Calender cal = new Calender();
 		
 		
-	
-		while(true) {
+		boolean isLoop =true;
+		while(isLoop) {
+			System.out.println("명령 (1, 2, 3, h, q");
 			String cmd = scanner.next();
-			if(cmd.equals("1")) cmdRegister();
-			else if (cmd.equals("2")) cmdSearch();
-			else if (cmd.equals("3")) cmdCal(scanner, cal);
-			else if (cmd.equals("h")) printMenu();
-			else if (cmd.equals("q")) 
+			switch (cmd) {
+			case "1":
+				cmdRegister(scanner, cal);
 				break;
+			case "2":
+				cmdSearch(scanner, cal);
+				break;
+			case "3":
+				cmdCal(scanner, cal);
+				break;
+			case "h":
+				printMenu();
+				break;
+			case "q":
+				isLoop=false;
+				break;
+			}
 		}
 	
 		System.out.println("프로그램 종료");
@@ -73,15 +95,34 @@ public class Prompt {
 		c.printCalender(year, month);
 	}
 
-	private void cmdSearch() {
+	private void cmdSearch(Scanner s, Calender c) throws ParseException {
 		
+		System.out.println("[일정검색]");
+		try {
+			System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String date = s.next();
+		String plan = c.searchPlan(date);
+		System.out.println(plan);
 	}
 
-	private void cmdRegister() {
-		
-	}
+	private void cmdRegister(Scanner s, Calender cal) throws ParseException {
+        System.out.println("[새 일정 등록]");
+        System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
+        String date = s.next();
+        String text = "";
+        s.nextLine(); //ignore one newline
+        System.out.println("일정을 입력해 주세요.");
+        text = s.nextLine();
+        cal.resgisterPlan(date, text);
+        
+ 
+    }
 
-public static void main(String[] args) {
+public static void main(String[] args) throws ParseException {
 	Prompt p = new Prompt();
 	p.runPrompt();
 	
