@@ -25,17 +25,17 @@ public class Prompt {
 		case "su":
 			return 0;
 		case "mo":
-			return 0;	
+			return 1;	
 		case "tu":
-			return 0;
+			return 2;
 		case "we":
-			return 0;
+			return 3;
 		case "th":
-			return 0;
+			return 4;
 		case "fr":
-			return 0;
+			return 5;
 		case "sa":
-			return 0;
+			return 6;
 			default:
 				return 0;
 		}
@@ -51,7 +51,7 @@ public class Prompt {
 		
 		boolean isLoop =true;
 		while(isLoop) {
-			System.out.println("명령 (1, 2, 3, h, q");
+			System.out.println("명령 (1, 2, 3, h, q)");
 			String cmd = scanner.next();
 			switch (cmd) {
 			case "1":
@@ -98,15 +98,14 @@ public class Prompt {
 	private void cmdSearch(Scanner s, Calender c) throws ParseException {
 		
 		System.out.println("[일정검색]");
-		try {
-			System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
 		String date = s.next();
-		String plan = c.searchPlan(date);
-		System.out.println(plan);
+		PlanItem plan = c.searchPlan(date);
+		if (plan != null) {
+		System.out.println(plan.detail);
+		}else {
+			System.out.println("일정이 없습니다.");
+		}
 	}
 
 	private void cmdRegister(Scanner s, Calender cal) throws ParseException {
@@ -114,9 +113,13 @@ public class Prompt {
         System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
         String date = s.next();
         String text = "";
-        s.nextLine(); //ignore one newline
-        System.out.println("일정을 입력해 주세요.");
-        text = s.nextLine();
+        System.out.println("일정을 입력해 주세요.(끝에;)");
+        String word;
+        while (!(word = s.next()).endsWith(";")){
+        	text += word+"\n";
+        }
+        word = word.replace(";", "");
+        text+=word;
         cal.resgisterPlan(date, text);
         
  

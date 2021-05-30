@@ -1,7 +1,6 @@
 package jv.calender;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.HashMap;
 
@@ -11,28 +10,23 @@ public class Calender {
 	private static final int[] leapMaxDays = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};	
 	
 	
-	private HashMap<Date, String> planMap;
+	private HashMap<Date, PlanItem> planMap;
 	
 	public Calender() {
-		planMap = new HashMap<Date, String>();
+		planMap = new HashMap<Date, PlanItem>();
 	}
 	
 	public void resgisterPlan(String strDate, String plan) {
 		
-		try {
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-			planMap.put(date, plan);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		PlanItem p = new PlanItem(strDate, plan);
+		planMap.put(p.getDate(), p);
+		
 		
 	}
 	
-	public String searchPlan(String strDate) throws ParseException {
-		Date date;
-		date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-		String plan = planMap.get(date);
-		return plan;
+	public PlanItem searchPlan(String strDate){
+		Date date = PlanItem.getDatefromString(strDate);
+		return planMap.get(date);
 	}
 	
 	public boolean isLeapYear(int year) {
