@@ -76,7 +76,7 @@ public class Prompt {
 		String date = s.next();
 		PlanItem plan = c.searchPlan(date);
 		if (plan != null) {
-		System.out.println(plan.detail);
+		System.out.println("일정: " + plan.detail + "참여인원: " + plan.participants);
 		}else {
 			System.out.println("일정이 없습니다.");
 		}
@@ -91,6 +91,16 @@ public class Prompt {
         System.out.println("장소를 입력해 주세요.");
         String location =s.next();
         
+        
+        System.out.println("참여인원을 입력해 주세요.(마침표'q'입력시 저장)");
+        String participants = "";
+        while(true) {
+        	String person=s.next();
+        	if (person.equals("q"))
+        		break;
+        	participants += person+" ";
+        }
+        
         System.out.println("일정을 입력해 주세요.(마침표'q'입력시 저장)");
         String text = "";
         while(true) {
@@ -98,9 +108,9 @@ public class Prompt {
         	if (plan.equals("q"))
         		break;
         	text += plan+" ";
-        }   
-        cal.resgisterPlan(date,location, text);
+        }
         
+        cal.resgisterPlan(date,location, participants, text);
  
     }
 

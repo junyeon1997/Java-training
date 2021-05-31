@@ -30,8 +30,9 @@ public class Calender {
 				String[] words = line.split(",");
 				String date = words[0];
 				String location = words[1];
-				String detail = words[2].replace("\"", "");
-				PlanItem p = new PlanItem(date, location, detail);
+				String participants = words[2];
+				String detail = words[3].replace("\"", "");
+				PlanItem p = new PlanItem(date, location, participants, detail);
 				planMap.put(p.getDate(), p);
 			}s.close();
 		} catch (FileNotFoundException e) {
@@ -41,9 +42,9 @@ public class Calender {
 		
 	}
 	
-	public void resgisterPlan(String strDate, String location, String plan) {
+	public void resgisterPlan(String strDate, String location, String participants, String plan) {
 		
-		PlanItem p = new PlanItem(strDate, location, plan);
+		PlanItem p = new PlanItem(strDate, location, participants, plan);
 		planMap.put(p.getDate(), p);
 		
 		File f = new File(saveFile);

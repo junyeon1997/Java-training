@@ -7,9 +7,9 @@ import java.util.Date;
 public class PlanItem {
 	
 	public Date planDate;
-	public String detail;
 	public String location;
-	public String people ="";
+	public String participants;
+	public String detail;
 	
 	public static Date getDatefromString(String strDate) {
 		Date date = null;
@@ -21,24 +21,21 @@ public class PlanItem {
 		return date;
 	}
 	
-	public PlanItem(String date, String location, String detail) {
+	public PlanItem(String date, String location, String participants, String detail) {
 		this.planDate = getDatefromString(date);
 		this.location = location;
 		this.detail = detail;
+		this.participants = participants;
 	}
 	
 	public Date getDate() {
 		return planDate;
 	}
 	
-	public void addPeople(String name) {
-		people +=name + ",";
-	}
-
 	public String saveString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String sdate = formatter.format(planDate);
-		return sdate + ", " +"장소: " + location + ", " + "일정: " + detail  + "\n";
+		return sdate + ", " +"장소: " + location + ", "+"참여인원: "+ participants + "일정: "+ "," + detail  + "\n";
 	}
 	
 }
