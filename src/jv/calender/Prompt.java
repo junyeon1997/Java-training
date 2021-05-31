@@ -14,32 +14,6 @@ public class Prompt {
 
 	}
 	
-	/**
-	 * 
-	 * @param week 요일명
-	 * @return 0=Sunday ~ 6=Saturday
-	 */
-	
-	public int parseDay(String week) {
-		switch (week) {
-		case "su":
-			return 0;
-		case "mo":
-			return 1;	
-		case "tu":
-			return 2;
-		case "we":
-			return 3;
-		case "th":
-			return 4;
-		case "fr":
-			return 5;
-		case "sa":
-			return 6;
-			default:
-				return 0;
-		}
-}
 	
 	
 	public void runPrompt() throws ParseException {

@@ -29,10 +29,6 @@ public class PlanItem {
 		return planDate;
 	}
 	
-	public void addPeople(String name) {
-		people +=name + ",";
-	}
-
 	public String saveString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String sdate = formatter.format(planDate);
