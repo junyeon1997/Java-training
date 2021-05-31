@@ -86,15 +86,17 @@ public class Prompt {
         System.out.println("[새 일정 등록]");
         System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
         String date = s.next();
-        String text = "";
+        System.out.println("장소를 입력해 주세요.");
+        String location =s.next();
         System.out.println("일정을 입력해 주세요.(끝에;)");
         String word;
+        String text = "";
         while (!(word = s.next()).endsWith(";")){
         	text += word+" ";
         }
         word = word.replace(";", "");
         text+=word;
-        cal.resgisterPlan(date, text);
+        cal.resgisterPlan(date,location, text);
         
  
     }

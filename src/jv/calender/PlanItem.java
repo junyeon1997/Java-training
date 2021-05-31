@@ -8,6 +8,7 @@ public class PlanItem {
 	
 	public Date planDate;
 	public String detail;
+	public String location;
 	public String people ="";
 	
 	public static Date getDatefromString(String strDate) {
@@ -20,8 +21,9 @@ public class PlanItem {
 		return date;
 	}
 	
-	public PlanItem(String date, String detail) {
+	public PlanItem(String date, String location, String detail) {
 		this.planDate = getDatefromString(date);
+		this.location = location;
 		this.detail = detail;
 	}
 	
@@ -29,10 +31,14 @@ public class PlanItem {
 		return planDate;
 	}
 	
+	public void addPeople(String name) {
+		people +=name + ",";
+	}
+
 	public String saveString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String sdate = formatter.format(planDate);
-		return sdate + "," + "\"" + detail + "\"" + "\n";
+		return sdate + "," + "\"" + "장소: " + location + "\""+ "," + "\"" + detail + "\"" + "\n";
 	}
 	
 }
