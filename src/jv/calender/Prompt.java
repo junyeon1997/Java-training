@@ -54,11 +54,11 @@ public class Prompt {
 		int month = -1;
 		int year = -1;
 		System.out.println("년도을 입력하세요.(exit: -1)");
-		System.out.println("Year> ");
+		System.out.print("Year> ");
 		year = s.nextInt();
 		
 		System.out.println("달을 입력하세요.(exit: -1)");
-		System.out.println("Month> ");
+		System.out.print("Month> ");
 		month = s.nextInt();
 	
 		if (month > 12 || month < 1) {
@@ -73,6 +73,7 @@ public class Prompt {
 		
 		System.out.println("[일정검색]");
 		System.out.println("날짜와 시간을 입력해주세요 (yyyy-MM-dd/HH:mm)");
+		System.out.print("Date> ");
 		String date = s.next();
 		PlanItem plan = c.searchPlan(date);
 		if (plan != null) {
@@ -86,13 +87,15 @@ public class Prompt {
         System.out.println("[새 일정 등록]");
         
         System.out.println("날짜와 시간을 입력해 주세요 (yyyy-MM-dd/HH:mm)");
+        System.out.print("Date> ");
         String date = s.next();
         
         System.out.println("장소를 입력해 주세요.");
+        System.out.print("Location> ");
         String location =s.next();
         
-        
         System.out.println("참여인원을 입력해 주세요.(마침표'q'입력시 저장)");
+        System.out.println("participants> ");
         String participants = "";
         while(true) {
         	String person=s.next();
@@ -102,6 +105,7 @@ public class Prompt {
         }
         
         System.out.println("일정을 입력해 주세요.(마침표'q'입력시 저장)");
+        System.out.println("Plan> ");
         String text = "";
         while(true) {
         	String plan=s.next();

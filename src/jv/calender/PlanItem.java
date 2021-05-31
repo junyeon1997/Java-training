@@ -35,7 +35,7 @@ public class PlanItem {
 	public String saveString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
 		String sdate = formatter.format(planDate);
-		return "날짜: " + sdate + ", " +"장소: " + location + ", "+"참여인원: "+ participants + "일정: "+ "," + detail  + "\n";
+		return sdate + ", " +"장소: " + location + ", "+"참여인원: "+ participants + ", " + "일정: "+ detail  + "\n";
 	}
 	
 }
