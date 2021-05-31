@@ -84,18 +84,21 @@ public class Prompt {
 
 	private void cmdRegister(Scanner s, Calender cal) throws ParseException {
         System.out.println("[새 일정 등록]");
+        
         System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
         String date = s.next();
+        
         System.out.println("장소를 입력해 주세요.");
         String location =s.next();
-        System.out.println("일정을 입력해 주세요.(끝에;)");
-        String word;
+        
+        System.out.println("일정을 입력해 주세요.(마침표'q'입력시 저장)");
         String text = "";
-        while (!(word = s.next()).endsWith(";")){
-        	text += word+" ";
-        }
-        word = word.replace(";", "");
-        text+=word;
+        while(true) {
+        	String plan=s.next();
+        	if (plan.equals("q"))
+        		break;
+        	text += plan+" ";
+        }   
         cal.resgisterPlan(date,location, text);
         
  
