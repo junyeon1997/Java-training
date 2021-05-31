@@ -14,7 +14,7 @@ public class PlanItem {
 	public static Date getDatefromString(String strDate) {
 		Date date = null;
 		try {
-			date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			date = new SimpleDateFormat("yyyy-MM-dd/HH:mm").parse(strDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -33,9 +33,9 @@ public class PlanItem {
 	}
 	
 	public String saveString() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
 		String sdate = formatter.format(planDate);
-		return sdate + ", " +"장소: " + location + ", "+"참여인원: "+ participants + "일정: "+ "," + detail  + "\n";
+		return "날짜: " + sdate + ", " +"장소: " + location + ", "+"참여인원: "+ participants + "일정: "+ "," + detail  + "\n";
 	}
 	
 }

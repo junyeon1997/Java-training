@@ -72,7 +72,7 @@ public class Prompt {
 	private void cmdSearch(Scanner s, Calender c) throws ParseException {
 		
 		System.out.println("[일정검색]");
-		System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
+		System.out.println("날짜와 시간을 입력해주세요 (yyyy-MM-dd/HH:mm)");
 		String date = s.next();
 		PlanItem plan = c.searchPlan(date);
 		if (plan != null) {
@@ -85,7 +85,7 @@ public class Prompt {
 	private void cmdRegister(Scanner s, Calender cal) throws ParseException {
         System.out.println("[새 일정 등록]");
         
-        System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
+        System.out.println("날짜와 시간을 입력해 주세요 (yyyy-MM-dd/HH:mm)");
         String date = s.next();
         
         System.out.println("장소를 입력해 주세요.");
