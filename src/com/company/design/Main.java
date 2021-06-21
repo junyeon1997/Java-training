@@ -2,32 +2,23 @@ package com.company.design;
 
 import com.company.design.facade.Ftp;
 import com.company.design.facade.Reader;
+import com.company.design.facade.SftpClient;
 import com.company.design.facade.Writer;
 
 public class Main {
 
     public static void main(String[] args) {
-        Ftp ftpClient = new Ftp("www.example.co.kr",22,"/home/path");
-        ftpClient.connect();
-        ftpClient.disConnect();
+        SftpClient sftpClient = new SftpClient("www.example.co.kr",22,"/home/etc","text.tmp");
 
-        Writer writer = new Writer("text.tmp");
-        writer.fileConnect();
-        writer.write();
+        sftpClient.connect();
 
-        Reader reader = new Reader("text.tmp");
-        reader.fileConnect();
-        reader.fileRead();
+        sftpClient.write();
 
-        reader.fileDisconnect();
-        writer.fileDisconnect();
-        ftpClient.disConnect();
+        sftpClient.read();
+
+        sftpClient.disConnect();
     }
 
-
-
-
-
-    }
+}
 
 
