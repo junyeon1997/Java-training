@@ -1,26 +1,33 @@
 package com.company.design;
 
-import com.company.design.decorator.*;
-import com.company.design.observer.Button;
-import com.company.design.observer.IButtonListener;
-
+import com.company.design.facade.Ftp;
+import com.company.design.facade.Reader;
+import com.company.design.facade.Writer;
 
 public class Main {
 
     public static void main(String[] args) {
-        Button button = new Button("버튼");
+        Ftp ftpClient = new Ftp("www.example.co.kr",22,"/home/path");
+        ftpClient.connect();
+        ftpClient.disConnect();
 
-        button.addListener(new IButtonListener() {
-            @Override
-            public void clickEvent(String event) {
-                System.out.println(event);
-            }
-        });
+        Writer writer = new Writer("text.tmp");
+        writer.fileConnect();
+        writer.write();
 
-        button.click("메시지 전달 : click");
+        Reader reader = new Reader("text.tmp");
+        reader.fileConnect();
+        reader.fileRead();
+
+        reader.fileDisconnect();
+        writer.fileDisconnect();
+        ftpClient.disConnect();
+    }
+
+
 
 
 
     }
 
-}
+
